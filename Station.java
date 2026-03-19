@@ -38,6 +38,10 @@ public class Station {
         inService = !inService;
     }
 
+    public void connect(Station c) {
+        addNext(c);
+    }
+
     // "STATION Museum: pink line, in service: true, previous station: none, next station: none";
     public String toString() {
         return "STATION " + name + ": " + color + " line, in service: " + inService + ", previous station: " + prev + ", next station: " + next;
