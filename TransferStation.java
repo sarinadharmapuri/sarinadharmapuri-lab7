@@ -2,23 +2,23 @@ import java.util.*;
 
 public class TransferStation extends Station {
 
-    private ArrayList<Station> transferStations;
+    public ArrayList<Station> otherStations;
 
     public TransferStation(String color, String name) {
         super(color, name);
-        transferStations = new ArrayList<>();
+        otherStations = new ArrayList<>();
 
     }
 
     public void addTransferStationPrev(Station a) {
-        transferStations.add(a);
+        otherStations.add(a);
         if (a != null) {
             a.next = this;
         }
     }
 
     public void addTransferStationNext(Station b) {
-        transferStations.add(b);
+        otherStations.add(b);
         if (b != null) {
             b.next = this;
         }
@@ -26,8 +26,8 @@ public class TransferStation extends Station {
 
     public String toString() {
         String result = "";
-        for (int i = 0; i < transferStations.size(); i++) {
-            result = result + transferStations.get(i).toString();
+        for (int i = 0; i < otherStations.size(); i++) {
+            result = result + otherStations.get(i).toString();
         }
 
         return "TRANSFER" + super.toString() + result;

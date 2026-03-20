@@ -42,8 +42,28 @@ public class Station {
         addNext(c);
     }
 
+    public boolean equals(Station d) {
+        
+    }
+
+    public int tripLength(Station dest) {
+        return -1;
+    }
+
     // "STATION Museum: pink line, in service: true, previous station: none, next station: none";
     public String toString() {
-        return "STATION " + name + ": " + color + " line, in service: " + inService + ", previous station: " + prev + ", next station: " + next;
+        String prevName;
+        String nextName;
+        if (prev != null) {
+            prevName = prev.name;
+        } else {
+            prevName = "none";
+        }
+        if (next != null) {
+            nextName = next.name;
+        } else {
+            nextName = "none";
+        }
+        return "STATION " + name + ": " + color + " line, in service: " + inService + ", previous station: " + prevName + ", next station: " + nextName;
     }
 }
