@@ -43,7 +43,11 @@ public class Station {
     }
 
     public boolean equals(Station d) {
-        
+        if (this.name.equals(d.name) && this.color.equals(d.color)) {
+            return true;
+        }
+
+        return false;
     }
 
     public int tripLength(Station dest) {
