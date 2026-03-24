@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 public class Station {
 
@@ -51,6 +51,47 @@ public class Station {
     }
 
     public int tripLength(Station dest) {
+        int result = recursiveTripLength(this, dest, 0);
+        return result;
+    }
+    // use -1 to signal a deadend or an already visited path
+    public int recursiveTripLength(Station start, Station dest, int count) {
+        // base cases
+        // found the dest
+        if (start.equals(dest)) {
+            return count;
+        }
+        // already visited
+        if (start.isAvailable() == false) {
+            return -1;
+        }
+        
+        if (start instanceof EndStation && count != 0) {
+            return -1;
+        }
+
+        start.switchAvailable();
+
+        if (start instanceof TransferStation) {
+            TransferStation temp = (TransferStation) start;
+            for (int i = 0; i < temp.otherStations.size(); i++) {
+                if (temp.otherStations.get(i).next != null && temp.otherStations.get(i).isAvailable()) {
+                    int nextTransferStation = recursiveTripLength(temp.otherStations.get(i), dest, count + 1);
+                    if (nextTransferStation != -1) {
+                        start.switchAvailable();
+                        return nextTransferStation;
+                    }
+                }
+            }
+        }
+
+        if (start.next != null) {
+            start.switchAvailable();
+            return recursiveTripLength(start.next, dest, count + 1);
+        }
+
+
+        start.switchAvailable();
         return -1;
     }
 
